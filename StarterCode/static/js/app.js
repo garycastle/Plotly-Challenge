@@ -45,7 +45,7 @@ d3.json("samples.json").then((data) => {
 
   Plotly.newPlot("bubble", DataBubble, LayoutBubble);
 
-  
+
   var bar_data =[
     {
       y:ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
@@ -65,3 +65,17 @@ d3.json("samples.json").then((data) => {
   Plotly.newPlot("bar", bar_data, barLayout);
 });
 }
+
+function init() {
+
+var selector = d3.select("#selDataset");
+
+d3.json("samples.json").then((data) => {
+  var sampleNames = data.names;
+  sampleNames.forEach((sample) => {
+    selector
+      .append("option")
+      .text(sample)
+      .property("value", sample);
+  });
+
