@@ -11,9 +11,15 @@ function buildMetadata(sample) {
     });
 
 
+
+
+  });
+}
+
+
 function buildCharts(sample) {
 
-
+// Use `d3.json` to fetch the sample data for the plots
 d3.json("samples.json").then((data) => {
   var samples= data.samples;
   var resultsarray= samples.filter(sampleobject => 
@@ -23,6 +29,7 @@ d3.json("samples.json").then((data) => {
   var ids = result.otu_ids;
   var labels = result.otu_labels;
   var values = result.sample_values;
+
 
   var LayoutBubble = {
     margin: { t: 0 },
@@ -46,6 +53,7 @@ d3.json("samples.json").then((data) => {
   Plotly.newPlot("bubble", DataBubble, LayoutBubble);
 
 
+
   var bar_data =[
     {
       y:ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
@@ -65,10 +73,12 @@ d3.json("samples.json").then((data) => {
   Plotly.newPlot("bar", bar_data, barLayout);
 });
 }
+ 
 
 function init() {
 
 var selector = d3.select("#selDataset");
+
 
 d3.json("samples.json").then((data) => {
   var sampleNames = data.names;
@@ -79,7 +89,7 @@ d3.json("samples.json").then((data) => {
       .property("value", sample);
   });
 
-  // Use the first sample from the list to build the initial plots
+
   const firstSample = sampleNames[0];
   buildCharts(firstSample);
   buildMetadata(firstSample);
@@ -87,14 +97,11 @@ d3.json("samples.json").then((data) => {
 }
 
 function optionChanged(newSample) {
-// Fetch new data each time a new sample is selected
+
 buildCharts(newSample);
 buildMetadata(newSample);
 }
 
 
 
-// Initialize the dashboard
 init();
-
-
