@@ -79,3 +79,22 @@ d3.json("samples.json").then((data) => {
       .property("value", sample);
   });
 
+  // Use the first sample from the list to build the initial plots
+  const firstSample = sampleNames[0];
+  buildCharts(firstSample);
+  buildMetadata(firstSample);
+});
+}
+
+function optionChanged(newSample) {
+// Fetch new data each time a new sample is selected
+buildCharts(newSample);
+buildMetadata(newSample);
+}
+
+
+
+// Initialize the dashboard
+init();
+
+
