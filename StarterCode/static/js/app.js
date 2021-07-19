@@ -42,3 +42,5 @@ d3.json("samples.json").then((data) => {
         }
     }
   ];
+
+  Plotly.newPlot("bubble", DataBubble, LayoutBubble);
