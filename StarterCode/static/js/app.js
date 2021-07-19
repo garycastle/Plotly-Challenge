@@ -23,3 +23,22 @@ d3.json("samples.json").then((data) => {
   var ids = result.otu_ids;
   var labels = result.otu_labels;
   var values = result.sample_values;
+
+  var LayoutBubble = {
+    margin: { t: 0 },
+    xaxis: { title: "OTU ID" },
+    hovermode: "closest",
+    };
+
+    var DataBubble = [ 
+    {
+      x: ids,
+      y: values,
+      text: labels,
+      mode: "markers",
+      marker: {
+        color: ids,
+        size: values,
+        }
+    }
+  ];
